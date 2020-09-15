@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.dna.backend.modle.User;
 import com.dna.backend.repository.UserRepository;
 //www.google.com/user/1 ---- path param
 @RequestMapping("/user")
+@RestController
 public class UserController {
 
 	@Autowired // DI from spring
@@ -29,8 +32,15 @@ public class UserController {
 	}
 	
 	@PostMapping("/")
-	public User createUser(@RequestBody User user) {
+	public User postUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
+	
+//	@PutMapping("/")
+//	public User putUser(@RequestBody User user) {
+//		User oldUser = userRepository.findById(user.getClass()).orElse(null);
+//		return userRepository.save(user);
+//	}
+	
 	
 }
