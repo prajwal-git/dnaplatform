@@ -3,16 +3,21 @@ package com.dna.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.dna.backend.modle.User;
 import com.dna.backend.repository.UserRepository;
 //www.google.com/user/1 ---- path param
 @RequestMapping("/user")
+@RestController
 public class UserController {
 
 	@Autowired // DI from spring
@@ -24,12 +29,27 @@ public class UserController {
 	}
 	
 	@GetMapping("/{id}")
-	public List<User> getUser(@PathVariable Integer id){
-		return (List<User>) userRepository.findById(id).orElse(null);
+	public User getUser(@PathVariable Integer id){
+		return  userRepository.findById(id).orElse(null);
 	}
 	
 	@PostMapping("/")
 	public User createUser(@RequestBody User user) {
+	
+		return userRepository.save(user);
+	}
+	@PutMapping("/")
+	public User updateUser(@RequestBody User user) {
+			
+		return userRepository.save(user);
+	}
+	@DeleteMapping("/")
+	public User delUser(@RequestBody User user) {
+		
+		return userRepository.save(user);
+	}
+	@PatchMapping("/")
+	public User patUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
 	
