@@ -6,10 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Component
+
+
 public class User {
 
 	@Id
@@ -28,5 +36,11 @@ public class User {
 	private Date dob;
 	private boolean isActive;
 	private char gender;
+	
+	void show() {
+		System.out.println("this is method");
+		
+	}
+	
 
 }
