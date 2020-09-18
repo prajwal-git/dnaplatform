@@ -68,12 +68,13 @@ public class UserController {
 	
 	
 	
-//	@PutMapping("/")
-//	public User putUser(@RequestBody User user) {
-//		User user = userRepository.findById(user.getId()).orElse(null);
-//		
-//		
-//	}
-	
+	@PutMapping("/")
+	public User putUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	@PatchMapping("/")
+	public User patchUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
 	
 }
