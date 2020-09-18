@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,12 +45,13 @@ public class UserController {
 		 userRepository.deleteById(id);
 	}
 	
-//	@PutMapping("/")
-//	public User putUser(@RequestBody User user) {
-//		User user = userRepository.findById(user.getId()).orElse(null);
-//		
-//		
-//	}
-	
+	@PutMapping("/")
+	public User putUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	@PatchMapping("/")
+	public User patchUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
 	
 }
