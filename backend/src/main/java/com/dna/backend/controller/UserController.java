@@ -3,8 +3,11 @@ package com.dna.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,10 +22,13 @@ import com.dna.backend.repository.UserRepository;
 @RequestMapping("/user")
 @RestController
 @CrossOrigin
+@Component
 public class UserController {
 
 	@Autowired // DI from spring
 	private UserRepository userRepository;
+	private User Abc;
+	
 	
 	@GetMapping("/")
 	public List<User> getAllUsers(){
@@ -43,6 +49,24 @@ public class UserController {
 	public void deleteUser(@PathVariable Integer id) {
 		 userRepository.deleteById(id);
 	}
+	@PatchMapping("/")
+	public User patUser (@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	
+	/*
+	 * @Bean("/") public User getUser(@RequestBody User user) { return
+	 * userRepository.save(user);
+	 */
+	
+	public void display() {
+		System.out.println("this is display");
+		
+		
+	}
+	
+	
+	
 	
 //	@PutMapping("/")
 //	public User putUser(@RequestBody User user) {
