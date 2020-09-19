@@ -34,10 +34,4 @@ public class User {
 	private boolean isActive;
 	private char gender;
 	
-	void show() {
-		System.out.println("this is method");
-		
-	}
-	
-
 }
