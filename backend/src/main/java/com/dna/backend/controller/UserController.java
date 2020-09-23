@@ -2,6 +2,7 @@ package com.dna.backend.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,15 @@ import com.dna.backend.repository.UserRepository;
 @RestController
 @CrossOrigin
 public class UserController {
+	final static Logger logger = Logger.getLogger(UserController.class);
 
 	@Autowired // DI from spring
 	private UserRepository userRepository;
 	
+	
 	@GetMapping("/")
 	public List<User> getAllUsers(){
+		logger.info("Get method");
 		return userRepository.findAll();
 	}
 	
