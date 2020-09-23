@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
 
 	@Id
@@ -33,6 +34,10 @@ public class User {
 	private boolean isActive;
 	private char gender;
 	
+	void show() {
+		System.out.println("this is method");
+		
+	}
 	
 
 }
