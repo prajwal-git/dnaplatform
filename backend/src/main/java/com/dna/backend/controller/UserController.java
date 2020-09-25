@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dna.backend.modle.User;
+import com.dna.backend.repository.RoleRepository;
 import com.dna.backend.repository.UserRepository;
 
 //www.google.com/user/1 ---- path param
@@ -25,6 +26,10 @@ public class UserController {
 
 	@Autowired // DI from spring
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
 
 	@GetMapping("/")
 	public List<User> getAllUsers() {
@@ -39,8 +44,17 @@ public class UserController {
 	@PostMapping("/")
 	public User postUser(@RequestBody User user) {
 		return userRepository.save(user);
-
 	}
+	
+//	@PostMapping("/role")
+//	public Role postRole(@RequestBody Role role) {
+//		return roleRepository.save(role);
+//	}
+	
+//	@PostMapping("/userRole")
+//	public UserRole postUserRole(@RequestBody UserRole userRole) {
+//		return userRoleRepository.save(userRole);
+//	}
 
 	@DeleteMapping("/{id}")
 	public void deleteUser(@PathVariable Integer id) {
