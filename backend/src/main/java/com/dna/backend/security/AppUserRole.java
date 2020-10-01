@@ -5,8 +5,8 @@ import com.google.common.collect.Sets;
 import static com.dna.backend.security.AppUserPermission.*;
 
 public enum AppUserRole {
-USER(Sets.newHashSet()),
-STUDENT(Sets.newHashSet()),
+USER(Sets.newHashSet(USER_READ, USER_WRITE)),
+STUDENT(Sets.newHashSet(USER_READ, USER_WRITE)),
 ADMIN(Sets.newHashSet(USER_READ, USER_WRITE));
 	
 	private final Set<AppUserPermission> permissions;

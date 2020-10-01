@@ -27,35 +27,36 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	    private UserService userService;
 	
 
+	 // for now untill we ressolve the security issue
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.csrf().disable()
 		.authorizeRequests().antMatchers("/", "index", "/css/*", "/js/*") // permit any of these request
-				.permitAll()
-				.antMatchers("/**").hasRole(AppUserRole.ADMIN.name()) // Admin can access everything
-				.anyRequest()
-				.authenticated()
-				.and()
-				.formLogin()  // form base authentication
-				.loginPage("/login")
-				.permitAll() // to use my own login form
-				.defaultSuccessUrl("/courses", true) // redirect page after successfully login
-				.passwordParameter("password")
-				.usernameParameter("userName")
-				.and()
-				.rememberMe() // by default 2 weeks
-				.tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) // by now I am extending to 3 weeks
-				.rememberMeParameter("remember-me")
-				.key("secured")
-				.and()
-				.logout()
-				.logoutUrl("/logout")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) // if csrf is enabled delete this line
-				.clearAuthentication(true)
-				.invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID", "remember-me")
-				.logoutSuccessUrl("/login");
+				.permitAll();
+//				.antMatchers("/**").hasRole(AppUserRole.ADMIN.name()) 
+//				.anyRequest()
+//				.authenticated();
+//				.and()
+//				.formLogin()  // form base authentication
+//				.loginPage("/login")
+//				.permitAll() // to use my own login form
+//				.defaultSuccessUrl("/courses", true) // redirect page after successfully login
+//				.passwordParameter("password")
+//				.usernameParameter("userName")
+//				.and()
+//				.rememberMe() // by default 2 weeks
+//				.tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) // by now I am extending to 3 weeks
+//				.rememberMeParameter("remember-me")
+//				.key("secured")
+//				.and()
+//				.logout()
+//				.logoutUrl("/logout")
+//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) // if csrf is enabled delete this line
+//				.clearAuthentication(true)
+//				.invalidateHttpSession(true)
+//				.deleteCookies("JSESSIONID", "remember-me")
+//				.logoutSuccessUrl("/login");
 		
 		            
 	}
