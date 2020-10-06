@@ -11,6 +11,9 @@ import com.dna.backend.modle.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
 	User findByUserName(final String userName);
+	
+//	@Query
+//	public User getUserByUserName(@Param ("userName")  String userName);
 
 }
 

@@ -35,8 +35,8 @@ public class User {
 	private Date dob;
 	private boolean isActive;
 	private char gender;
-	@OneToMany (mappedBy="user",cascade=CascadeType.ALL)
-	private List<Role> roles;
+	private String role;
+	private boolean enable;
 	
 }
 

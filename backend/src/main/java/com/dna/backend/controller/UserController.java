@@ -18,7 +18,7 @@ import com.dna.backend.modle.User;
 import com.dna.backend.repository.UserRepository;
 
 //www.google.com/user/1 ---- path param
-@RequestMapping("/user")
+@RequestMapping("/user1")
 @RestController
 @CrossOrigin
 public class UserController {
