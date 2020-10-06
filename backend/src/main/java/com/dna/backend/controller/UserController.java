@@ -3,25 +3,56 @@ package com.dna.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.dna.backend.dto.UserDto;
 import com.dna.backend.modle.User;
 import com.dna.backend.repository.UserRepository;
+import com.dna.backend.service.UserService;
 
 //www.google.com/user/1 ---- path param
-@RequestMapping("/user1")
-@RestController
+@RequestMapping("/user")
+@Controller
 @CrossOrigin
 public class UserController {
+
+	@Autowired
+	private UserService userService;
+
+	public UserController() {
+		super();
+	}
+
+	public UserController(UserService userService) {
+		super();
+		this.userService = userService;
+	}
+
+	@ModelAttribute("user")
+	public UserDto UserDto() {
+		return new UserDto();
+	}
+
+	@GetMapping("/registration")
+	public String getRegistrationForm() {
+		return "registration";
+	}
+
+	@PostMapping("/register")
+	public String registerUser(@ModelAttribute("user") UserDto userDto) {
+		userService.save(userDto);
+		return "redirect:/registration?success";
+	}
 
 	@Autowired // DI from spring
 	private UserRepository userRepository;
@@ -40,16 +71,6 @@ public class UserController {
 	public User postUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
-
-//	@PostMapping("/role")
-//	public Role postRole(@RequestBody Role role) {
-//		return roleRepository.save(role);
-//	}
-
-//	@PostMapping("/userRole")
-//	public UserRole postUserRole(@RequestBody UserRole userRole) {
-//		return userRoleRepository.save(userRole);
-//	}
 
 	@DeleteMapping("/{id}")
 	public void deleteUser(@PathVariable Integer id) {

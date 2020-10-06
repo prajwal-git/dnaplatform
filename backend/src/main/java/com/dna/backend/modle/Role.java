@@ -17,6 +17,11 @@ public class Role {
 	@Id
 	@GeneratedValue
 	private int role_id;
-	private String role_name;	
+	private String role_name;
+
+	public Role(String role_name) {
+		super();
+		this.role_name = role_name;
+	}
 
 }
