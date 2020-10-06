@@ -18,7 +18,5 @@ public class Role {
 	@GeneratedValue
 	private int role_id;
 	private String role_name;	
-	@ManyToOne
-	private User user;
 
 }
