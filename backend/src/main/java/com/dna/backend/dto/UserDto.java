@@ -3,6 +3,9 @@ package com.dna.backend.dto;
 import java.util.Collection;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.dna.backend.modle.Role;
 
 public class UserDto {
@@ -20,6 +23,15 @@ public class UserDto {
 	private boolean isActive;
 	private char gender;
 	private Collection<Role> roles;
+	@Autowired
+	private static BCryptPasswordEncoder passwordEncoder;
+
+	/**
+	 * Creating default userDTO
+	 */
+	public static final UserDto DEFAULT_USER = new UserDto("InstanceAdmin", "InstanceAdmin", "InstanceAdmin",
+			"InstanceAdmin", "zorbasofted.com", passwordEncoder.encode("password"), "", Integer.parseInt(""),
+			Integer.parseInt(""), new Date(), true, '\u0000',null);
 
 	public UserDto() {
 		super();
@@ -31,7 +43,7 @@ public class UserDto {
 		super();
 		this.userName = userName;
 		this.firstName = firstName;
-		this.lastName = lastName;      
+		this.lastName = lastName;
 		this.middleName = middleName;
 		this.email = email;
 		this.password = password;
