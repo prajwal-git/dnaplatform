@@ -31,7 +31,7 @@ public class UserDto {
 		super();
 		this.userName = userName;
 		this.firstName = firstName;
-		this.lastName = lastName;
+		this.lastName = lastName;      
 		this.middleName = middleName;
 		this.email = email;
 		this.password = password;
