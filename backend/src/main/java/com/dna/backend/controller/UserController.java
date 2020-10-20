@@ -35,7 +35,7 @@ public class UserController {
 
 	public UserController(UserService userService) {
 		super();
-		this.userService = userService;
+		this.userService = userService;      
 	}
 
 	@ModelAttribute("user")
