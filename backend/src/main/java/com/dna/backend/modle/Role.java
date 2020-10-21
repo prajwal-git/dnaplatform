@@ -1,11 +1,8 @@
 package com.dna.backend.modle;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,13 +15,12 @@ import lombok.NoArgsConstructor;
 public class Role {
 	@Id
 	@GeneratedValue
-	private int role_id;
-	private String role_name;
+	private int roleId;
+	private String roleName;
 
-	public Role(String role_name) {
+	public Role(String roleName) {
 		super();
-		this.role_name = role_name;
+		this.roleName = roleName;
 	}
-private	List<Role> role;
 
 }

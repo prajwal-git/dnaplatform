@@ -1,6 +1,5 @@
 package com.dna.backend.service;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -19,15 +18,12 @@ import com.dna.backend.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-
 	@Autowired
 	private UserRepository userRepository;
 
-	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
-	
+
 	public UserServiceImpl(UserRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
@@ -36,15 +32,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User save(UserDto userDto) {
 		User user = new User(userDto.getUserName(), userDto.getFirstName(), userDto.getLastName(),
-				userDto.getMiddleName(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()), userDto.getAddress(),
-				userDto.getOfficePhone(), userDto.getCellPhone(), userDto.getDob(), userDto.isActive(),
-				userDto.getGender(), Arrays.asList(new Role("ROLE_USER")));
+				userDto.getMiddleName(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()),
+				userDto.getAddress(), userDto.getOfficePhone(), userDto.getCellPhone(), userDto.getDob(),
+				userDto.isActive(), userDto.getGender(), userDto.getRoles());
 		return userRepository.save(user);
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
 		User user = userRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
@@ -54,7 +49,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole_name())).collect(Collectors.toList());
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
 	}
-
 }

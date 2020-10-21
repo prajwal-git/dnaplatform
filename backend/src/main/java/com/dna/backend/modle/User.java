@@ -2,7 +2,6 @@ package com.dna.backend.modle;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,14 +38,10 @@ public class User {
 	private Date dob;
 	private boolean isActive;
 	private char gender;
-	@ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinTable(name = "user_roles",
-	joinColumns = @JoinColumn(
-			name =  "user_id" , referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(
-			name =  "role_id" , referencedColumnName = "role_id"))
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
 	private Collection<Role> roles;
-	
+
 	public User(String userName, String firstName, String lastName, String middleName, String email, String password,
 			String address, int officePhone, int cellPhone, Date dob, boolean isActive, char gender,
 			Collection<Role> roles) {
@@ -68,9 +60,5 @@ public class User {
 		this.gender = gender;
 		this.roles = roles;
 	}
-	
 
-	
 }
-
-
