@@ -6,30 +6,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name="User_Actions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+
+public class UserActions {
 	@Id
 	@GeneratedValue
-	private int roleId;
+	private int actionId;
 	
 	@Column(nullable=false)
-	private String roleName;
+	private String actionName;
 	
-	@ManyToMany(mappedBy="roleId")
+	@OneToMany(mappedBy="actionId")
 	private Set<RoleConfig> roleConfig;
-
-	public Role(String roleName) {
-		super();
-		this.roleName = roleName;
-	}
-
+	
+	
 }
