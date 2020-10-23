@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class Role {
 	@Column(nullable=false)
 	private String roleName;
 	
-	@ManyToMany(mappedBy="roleId")
+	@OneToMany(mappedBy="roleId")
 	private Set<RoleConfig> roleConfig;
 
 	public Role(String roleName) {

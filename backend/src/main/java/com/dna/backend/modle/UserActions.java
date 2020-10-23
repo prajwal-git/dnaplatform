@@ -29,6 +29,4 @@ public class UserActions {
 	
 	@OneToMany(mappedBy="actionId")
 	private Set<RoleConfig> roleConfig;
-	
-	
 }
