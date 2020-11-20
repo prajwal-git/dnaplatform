@@ -51,7 +51,7 @@ public class UserController {
 	@PostMapping("/register")
 	public String registerUser(@ModelAttribute("user") UserDto userDto) {
 		userService.save(userDto);
-		return "redirect:/registration?success";
+		return "redirect:/user/registration?success";
 	}
 
 	@Autowired // DI from spring
@@ -64,7 +64,7 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	public User getUser(@PathVariable Integer id) {
-		return userRepository.findById(id).orElse(null);
+		return userRepository.findById(id).orElse(null); 
 	}
 
 	@PostMapping("/")
