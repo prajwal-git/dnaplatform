@@ -53,6 +53,17 @@ public class UserController {
 		userService.save(userDto);
 		return "redirect:/registration?success";
 	}
+	
+	@GetMapping("/userCreation")
+	public String getUserCreationForm() {
+		return "userCreation";
+	}
+
+	@PostMapping("/createUser")
+	public String createUser(@ModelAttribute("user") UserDto userDto) {
+		userService.save(userDto);
+		return "redirect:/user/userCreation?success";
+	}
 
 	@Autowired // DI from spring
 	private UserRepository userRepository;
