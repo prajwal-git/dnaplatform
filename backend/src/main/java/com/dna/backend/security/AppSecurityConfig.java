@@ -54,6 +54,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 		.loginPage("/login")
 		.permitAll()
 		.and()
+		.oauth2Login()
+		.and()
 		.logout()
 		.invalidateHttpSession(true)
 		.clearAuthentication(true)
