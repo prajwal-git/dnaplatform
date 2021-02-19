@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.csv.CSVFormat;
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByEmail(username);
+		User user = userRepository.findByemail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
@@ -141,5 +142,21 @@ public class UserServiceImpl implements UserService {
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outSteam.toByteArray());
 		return new InputStreamResource(inputStream);
 	}
+
+	
+	/*
+	 * Implemented abstract method from UserService class 
+	 */
+	
+	@Override
+	  public Optional<User> findByUserName(String userName) {
+	  
+	  return userRepository.findByUserName(userName); }
+	 
+	@Override
+	  public Optional<User> findByUserEmail(String email) {
+	  
+	  return userRepository.findByEmail(email); }
+	 
 
 }
