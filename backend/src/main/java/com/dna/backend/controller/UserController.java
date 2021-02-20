@@ -2,13 +2,17 @@ package com.dna.backend.controller;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.dna.backend.dto.UserDto;
 import com.dna.backend.modle.User;
 import com.dna.backend.repository.UserRepository;
@@ -34,6 +37,8 @@ import com.dna.backend.service.UserServiceImpl;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRepository userRepository;
 
 	public UserController() {
 		super();
@@ -54,12 +59,38 @@ public class UserController {
 		return "registration";
 	}
 
+	/*
+	 * we can register new user through this method
+	 * 
+	 * @valid annotation will brought the validation we have created in Dto class.
+	 * binding result will bind the error result if it occur and whatever message
+	 * has been given in the variable of Dto class will display. else part display
+	 * the message. if userName and email can not use twice. these field required
+	 * unique
+	 */
 	@PostMapping("/register")
-	public String registerUser(@ModelAttribute("user") UserDto userDto) {
-		userService.save(userDto);
-		return "redirect:/registration?success";
+	public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto userDto, BindingResult result) {
+
+		if (result.hasErrors()) {
+			return new ResponseEntity<>(
+					result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList())
+							+ "",
+					HttpStatus.BAD_REQUEST);
+		} else {
+			return userService.findByUserName(userDto.getUserName())
+					.map(a -> new ResponseEntity<>("username already exists", HttpStatus.BAD_REQUEST))
+					.orElseGet(() -> userService.findByUserEmail(userDto.getEmail())
+							.map(u -> new ResponseEntity<>("email already in use", HttpStatus.BAD_REQUEST))
+							.orElseGet(() -> {
+								userService.save(userDto);
+
+								// Send user able to register email or other return new
+								return new ResponseEntity<>("User created", HttpStatus.CREATED);
+							}));
+
+		}
 	}
-	
+
 	@GetMapping("/userCreation")
 	public String getUserCreationForm() {
 		return "userCreation";
@@ -71,8 +102,7 @@ public class UserController {
 		return "redirect:/user/userCreation?success";
 	}
 
-	@Autowired // DI from spring
-	private UserRepository userRepository;
+
 
 	@GetMapping("/")
 	public List<User> getAllUsers() {
@@ -119,7 +149,7 @@ public class UserController {
 	public List<User> uploaddata(@RequestParam("file") MultipartFile file) throws IOException {
 		return (userServiceImpl).readFile(file);
 	}
-	
+
 	/*
 	 * This is rest call which will send CSV formatted data of User
 	 * 
@@ -128,7 +158,7 @@ public class UserController {
 	 * @return ResponseEntity<Resource> , media type application/csv
 	 * 
 	 */
-	
+
 	@GetMapping("/exportrole")
 	public ResponseEntity<Resource> getRoleCSV() throws IOException {
 		InputStreamResource inuser;
