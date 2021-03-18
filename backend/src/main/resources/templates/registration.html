@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -48,37 +46,37 @@
 					th:object="${user}">
 					<div class="form-group">
 						<label>Username <span>*</span></label> <input name="username"
-							class="input_textarea" id="username" size="25" req="1"
+							class="form-control" id="username" size="25" req="1"
 							valimessage="Username cannot be blank" valiclass="required" />
 					</div>
 
 					<div class="form-group">
 						<label>Password <span>*</span></label> <input name="password"
-							class="input_textarea" id="password" size="25" req="1"
+							class="form-control" id="password" size="25" req="1"
 							valimessage="Password cannot be blank" valiclass="required" />
 					</div>
 
 					<div class="form-group">
 						<label>First Name <span>*</span></label> <input name="first_name"
-							class="input_textarea" id="first_name" size="25" req="1"
+							class="form-control" id="first_name" size="25" req="1"
 							valimessage="First name cannot be blank" valiclass="required" />
 					</div>
 
 					<div class="form-group">
 						<label>Middle Name </label> <input name="middle_name"
-							class="input_textarea" id="middle_name" size="25" req="1"
+							class="form-control" id="middle_name" size="25" req="1"
 							valimessage="Middle name cannot be blank" />
 					</div>
 
 					<div class="form-group">
 						<label>Last Name <span>*</span></label> <input name="last_name"
-							class="input_textarea" id="last_name" size="25" req="1"
+							class="form-control" id="last_name" size="25" req="1"
 							valimessage="Last name cannot be blank" valiclass="required" />
 					</div>
 
 					<div class="form-group">
 						<label>Email address<span>*</span></label> <input name="email"
-							class="input_textarea" id="email" size="25" req="1"
+							class="form-control" id="email" size="25" req="1"
 							valimessage="Invalid email address" valiclass="email" />
 					</div>
 
@@ -91,7 +89,7 @@
 							<div>
 								<div class="country-wrap">
 									<label>Country <span>*</span></label> <select id="country"
-										name="country">
+										name="country" class="form-control">
 										<option value="Country">Please Select a Country</option>
 										<option value="Afganistan">Afghanistan</option>
 										<option value="Albania">Albania</option>
@@ -357,7 +355,7 @@
 								</div>
 								<div>
 									<label>Street address <span>*</span></label> <input
-										name="address1" class="input_textarea" id="address1" size="25"
+										name="address1" class="form-control" id="address1" size="25"
 										req="1" valimessage="Street Address cannot be blank"
 										valiclass="required" />
 								</div>
@@ -365,17 +363,17 @@
 							<div>
 								<div>
 									<label>Street address 2</label> <input name="address2"
-										class="input_textarea" id="address2" size="25" />
+										class="form-control" id="address2" size="25" />
 								</div>
 							</div>
 							<div>
 								<div class="city-wrap">
 									<label>City <span>*</span></label> <input name="city"
-										class="input_textarea" id="city" size="25" req="1"
+										class="form-control" id="city" size="25" req="1"
 										valimessage="City cannot be blank" valiclass="required" />
 								</div>
 								<div class="state-wrap">
-									<label>State<span>*</span></label> <select>
+									<label>State<span>*</span></label> <select class="form-control">
 										<option value="State">Please Select the State</option>
 										<option value="AL">Alabama</option>
 										<option value="AK">Alaska</option>
@@ -432,7 +430,7 @@
 								</div>
 								<div class="zip-wrap">
 									<label>Zip Code <span>*</span></label> <input name="zip"
-										class="input_textarea" id="zip" size="5" req="1"
+										class="form-control" id="zip" size="5" req="1"
 										valimessage="Invalid Zip code" valiclass="zip" />
 
 								</div>
@@ -446,9 +444,10 @@
 						<label class="control-label" for="phoneNumber"> Phone
 							Number </label> <input id="address" class="form-control"
 							placeholder="000-000-0000" th:field="*{address}" required
-							autofocus="autofocus" /> <select name="countryCode" id="">
-							<option data-countryCode="Code" value="Country" Selected>Please Select the Country Code</option>
-							
+							autofocus="autofocus" /> <br> <select name="countryCode" id="" class="form-control">
+							<option data-countryCode="Code" value="Country">Please
+								Select the Country Code</option>
+
 							<option data-countryCode="US" value="1">USA (+1)</option>
 							<optgroup label="Other countries">
 								<option data-countryCode="DZ" value="213">Algeria
@@ -798,25 +797,44 @@
 								<option data-countryCode="ZW" value="263">Zimbabwe
 									(+263)</option>
 							</optgroup>
-						</select> <input type="radio" name="Phone" id="Office"> <label
+						</select> <br> <input type="radio" name="Phone" id="Office"> <label
 							for="Office">Office</label> <input type="radio" name="Phone"
 							id="Cell"> <label for="Cell">Mobile</label>
 
 					</div>
 
-					Date of Birth <input type="text" name="dob"
-						placeholder="mm/dd/yyyy"> <br> 
-					
-					Gender: <input type="radio" name="gender" id="male"> <label for="male">Male</label>
-					<input type="radio" name="gender" id="female"> <label for="female">Female</label> <br>
+					<label> Date of Birth</label> <input type="text" name="dob"
+						placeholder="mm/dd/yyyy" class="form-control"> <br> <label> Gender:</label> <input
+						type="radio" name="gender" id="male"> <label for="male">Male</label>
+					<input type="radio" name="gender" id="female"> <label
+						for="female">Female</label> <br> <br>
 
 
 
 					<div class="form-group">
 						<button type="submit" class="btn btn-success">Register</button>
-						<span>Already registered? <a href="/" th:href="@{/login}">Login
-								here</a></span>
 					</div>
+					
+						
+						<div>
+						<h4>Already registered?</h4>
+						<div>
+								<a th:href="@{/loginHome}">Login here </a>							
+						</div>
+						
+						<div>
+						
+							<a th:href="@{/login}" class="text-light">Login with Google </a>
+							
+						</div>
+						</div>
+						<br>
+						<br>
+					
+					
+					
+					
+					
 				</form>
 			</div>
 		</div>
