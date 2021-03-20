@@ -13,7 +13,8 @@ public class KafKaConsumerService {
 	/**
 	 * Kafka Consumer Service class to complete the message consuming process
 	 * 
-	 * @authors Naina and Dinesh version 1.0
+	 * @authors Naina and Dinesh 
+	 * version 1.0
 	 * @since 2021/02/19
 	 *
 	 */
@@ -27,7 +28,7 @@ public class KafKaConsumerService {
 	 * 
 	 */
 
-	@KafkaListener(topics = "${general.topic.name}", groupId = "${general.topic.group.id}")
+	@KafkaListener(topics = "${general.topic.name}", groupId = "${general.topic.group.id}", autoStartup = "${general.topic.autoStartup}")
 	public void consume(String message) {
 		logger.info(String.format("Message recieved -> %s", message));
 	}
@@ -39,7 +40,7 @@ public class KafKaConsumerService {
 	 * 
 	 */
 
-	@KafkaListener(topics = "${user.topic.name}", groupId = "${user.topic.group.id}", containerFactory = "userKafkaListenerContainerFactory")
+	@KafkaListener(topics = "${user.topic.name}", groupId = "${user.topic.group.id}", containerFactory = "userKafkaListenerContainerFactory", autoStartup = "${general.topic.autoStartup}")
 	public void consume(User user) {
 		logger.info(String.format("User created -> %s", user));
 	}
