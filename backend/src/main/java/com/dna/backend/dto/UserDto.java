@@ -12,39 +12,38 @@ import com.dna.backend.modle.Role;
 /* used some annotation for the purpose of server side validation. In registration , 
  * some field required fill with size of character and message will display if not fill properly*/
 public class UserDto {
-	
+
 	@NotEmpty(message = "User name can not be empty")
-	@Size(min=3, max =20, message = "Length of userName must be between 3<20")
+	@Size(min = 3, max = 20, message = "Length of userName must be between 3<20")
 	private String userName;
-	
+
 	@NotNull(message = "First name can not be empty")
-	@Size(min=3, max =20, message = "First name shoud be 3<20")
+	@Size(min = 3, max = 20, message = "First name shoud be 3<20")
 	private String firstName;
 
 	@NotEmpty(message = "Last name can not be empty")
 	private String lastName;
-	
+
 	private String middleName;
-	
+
 	@Email(message = "email format required")
 	@NotEmpty(message = "email can not be empty")
 	private String email;
 	private String password;
 	private String address;
-	private int officePhone;
-	private int cellPhone;
+	private String officePhone;
+	private String cellPhone;
 	private Date dob;
 	private boolean isActive;
-	private char gender;
+	private String gender;
 	private Collection<Role> roles;
-	
 
 	public UserDto() {
 		super();
 	}
 
 	public UserDto(String userName, String firstName, String lastName, String middleName, String email, String password,
-			String address, int officePhone, int cellPhone, Date dob, boolean isActive, char gender,
+			String address, String officePhone, String cellPhone, Date dob, boolean isActive, String gender,
 			Collection<Role> roles) {
 		// super();
 		this.userName = userName;
@@ -118,19 +117,19 @@ public class UserDto {
 		this.address = address;
 	}
 
-	public int getOfficePhone() {
+	public String getOfficePhone() {
 		return officePhone;
 	}
 
-	public void setOfficePhone(int officePhone) {
+	public void setOfficePhone(String officePhone) {
 		this.officePhone = officePhone;
 	}
 
-	public int getCellPhone() {
+	public String getCellPhone() {
 		return cellPhone;
 	}
 
-	public void setCellPhone(int cellPhone) {
+	public void setCellPhone(String cellPhone) {
 		this.cellPhone = cellPhone;
 	}
 
@@ -150,11 +149,11 @@ public class UserDto {
 		this.isActive = isActive;
 	}
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

@@ -89,11 +89,11 @@ public class UserServiceImpl implements UserService {
 					user.setFirstName(data[0]);
 					user.setLastName(data[1]);
 					user.setMiddleName(data[2]);
-					user.setCellPhone(Integer.parseInt(data[3]));
+					user.setCellPhone(data[3]);
 					user.setAddress(data[4]);
 					user.setEmail(data[5]);
 					user.setActive(Boolean.parseBoolean(data[6]));
-					user.setOfficePhone(Integer.parseInt(data[7]));
+					user.setOfficePhone(data[7]);
 					user.setPassword(data[8]);
 					user.setUserName(data[9]);
 					userList.add(user);
@@ -130,11 +130,11 @@ public class UserServiceImpl implements UserService {
 			data.add(user.getFirstName());
 			data.add(user.getLastName());
 			data.add(user.getMiddleName());
-			data.add(Integer.toString(user.getCellPhone()));
+			data.add(user.getCellPhone());
 			data.add(user.getAddress());
 			data.add(user.getEmail());
 			data.add(Boolean.toString(user.isActive()));
-			data.add(Integer.toString(user.getOfficePhone()));
+			data.add(user.getOfficePhone());
 
 			csvPrinter.printRecord(data);
 		}
@@ -143,20 +143,20 @@ public class UserServiceImpl implements UserService {
 		return new InputStreamResource(inputStream);
 	}
 
-	
 	/*
-	 * Implemented abstract method from UserService class 
+	 * Implemented abstract method from UserService class
 	 */
-	
+
 	@Override
-	  public Optional<User> findByUserName(String userName) {
-	  
-	  return userRepository.findByUserName(userName); }
-	 
+	public Optional<User> findByUserName(String userName) {
+
+		return userRepository.findByUserName(userName);
+	}
+
 	@Override
-	  public Optional<User> findByUserEmail(String email) {
-	  
-	  return userRepository.findByEmail(email); }
-	 
+	public Optional<User> findByUserEmail(String email) {
+
+		return userRepository.findByEmail(email);
+	}
 
 }
