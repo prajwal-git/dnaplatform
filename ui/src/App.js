@@ -1,38 +1,24 @@
 import React from 'react';
-
-import { Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
-import UserForm from './components/UserForm/UserForm';
-import Dashboard from './components/Dashboard/Dashboard';
-import Account from './components/Account/Account';
-import Instructor from './components/Instructor/Instructor';
-import Map from './components/Map/Map';
-import Notification from './components/Notification/Notification';
-
-
-
-
-
-
-
-
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <div className="content">
-      <Navbar />
-      <Sidebar />
-
-      <Switch>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/account" component={Account} />
-        <Route path="/instructor" component={Instructor} />
-        <Route path="/userprofile" component={UserForm} />
-        <Route path="/maps" component={Map} />
-        <Route path="/notification" component={Notification} />
-      </Switch>
-
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }

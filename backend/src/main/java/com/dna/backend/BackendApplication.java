@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication // this is bootstrap classloader this is load first
+@SpringBootApplication
 @EnableSwagger2
 @EnableAutoConfiguration
 public class BackendApplication {
