@@ -13,13 +13,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableCaching
 @Configuration
 public class EhCacheConfiguration {
-	
+
 	@Bean
 	public CacheManager cacheManager() {
 		return new EhCacheCacheManager(cacheManagerFactory().getObject());
-	}	
-	
-	
+	}
+
 	@Bean
 	public EhCacheManagerFactoryBean cacheManagerFactory() {
 		EhCacheManagerFactoryBean bean = new EhCacheManagerFactoryBean();

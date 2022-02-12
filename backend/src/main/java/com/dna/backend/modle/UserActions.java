@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="User_Actions")
+@Table(name = "User_Actions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,10 +23,10 @@ public class UserActions {
 	@Id
 	@GeneratedValue
 	private int actionId;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String actionName;
-	
-	@OneToMany(mappedBy="actionId")
+
+	@OneToMany(mappedBy = "actionId")
 	private Set<RoleConfig> roleConfig;
 }

@@ -11,13 +11,13 @@ import com.dna.backend.modle.User;
 @RequestMapping("/fname")
 @Controller
 public class UsersResource {
-	
+
 	@Autowired
 	UsersCache usersCache;
-	
+
 	@GetMapping("/{firstName}")
 	public User getUser(@PathVariable final String firstName) {
-		return usersCache.getUser(firstName); 
+		return usersCache.getUser(firstName);
 	}
 
 }

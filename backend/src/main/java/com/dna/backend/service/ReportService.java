@@ -40,10 +40,11 @@ public class ReportService {
 	 * class path for Jasper Report compiling and ready to generate Data source
 	 * implementation that wraps a collection if JavaBean objects
 	 */
-@Value("${test}")
-private String ref;
-@Value("${save}")
-private String savefile;
+	@Value("${test}")
+	private String ref;
+	@Value("${save}")
+	private String savefile;
+
 	public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
 		List<User> user = userRepository.findAll();
 		File file = ResourceUtils.getFile(ref);
@@ -62,7 +63,7 @@ private String savefile;
 		}
 
 		if (reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint, savefile +"pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint, savefile + "pdf");
 		}
 		if (reportFormat.equalsIgnoreCase("csv")) {
 			JasperExportManager.exportReportToPdfFile(jasperPrint, savefile + "csv");

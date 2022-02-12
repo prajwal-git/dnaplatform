@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		super();
 		this.userRepository = userRepository;
 	}
-
+//getting data from userDto
 	@Override
 	public User save(UserDto userDto) {
 		User user = new User(userDto.getUserName(), userDto.getFirstName(), userDto.getLastName(),

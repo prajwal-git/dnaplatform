@@ -102,8 +102,6 @@ public class UserController {
 		return "redirect:/user/userCreation?success";
 	}
 
-
-
 	@GetMapping("/")
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
