@@ -60,5 +60,8 @@ public class User {
 		this.gender = gender;
 		this.roles = roles;
 	}
+	public void test() {
+		System.out.println("this test");
+	}
 
 }
