@@ -35,7 +35,7 @@ public class UserDto {
 	private String cellPhone;
 	private Date dob;
 	private boolean isActive;
-	private Character gender;
+	private String gender;
 	private Collection<Role> roles;
 
 	public UserDto() {
@@ -43,7 +43,7 @@ public class UserDto {
 	}
 
 	public UserDto(String userName, String firstName, String lastName, String middleName, String email, String password,
-			String address, String officePhone, String cellPhone, Date dob, boolean isActive, Character gender,
+			String address, String officePhone, String cellPhone, Date dob, boolean isActive, String gender,
 			Collection<Role> roles) {
 		// super();
 		this.userName = userName;
@@ -149,11 +149,11 @@ public class UserDto {
 		this.isActive = isActive;
 	}
 
-	public Character getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Character gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
