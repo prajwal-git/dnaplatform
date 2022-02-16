@@ -90,7 +90,10 @@ public class UserController {
 
 		}
 	}
-
+	@GetMapping("/login")
+	public String userLogin() {
+		return "login";
+	}
 	@GetMapping("/userCreation")
 	public String getUserCreationForm() {
 		return "userCreation";
