@@ -20,11 +20,11 @@ public class Role {
 	@Id
 	@GeneratedValue
 	private int roleId;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String roleName;
-	
-	@OneToMany(mappedBy="roleId")
+
+	@OneToMany(mappedBy = "roleId")
 	private Set<RoleConfig> roleConfig;
 
 	public Role(String roleName) {

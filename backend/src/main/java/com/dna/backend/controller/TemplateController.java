@@ -19,6 +19,6 @@ public class TemplateController {
 	@GetMapping("/")
 	public String home() {
 		return "index";
-	} 
+	}
 
 }

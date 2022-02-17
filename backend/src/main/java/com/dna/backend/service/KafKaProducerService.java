@@ -54,7 +54,8 @@ public class KafKaProducerService {
 	private KafkaTemplate<String, User> userKafkaTemplate;
 
 	/**
-	 * ListenableFuture is used to accept completion callbacks after sending message (to print in console)
+	 * ListenableFuture is used to accept completion callbacks after sending message
+	 * (to print in console)
 	 * 
 	 * 
 	 */

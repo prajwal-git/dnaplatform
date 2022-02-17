@@ -16,13 +16,13 @@ import net.sf.jasperreports.engine.JRException;
 @RestController
 @RequestMapping("/report")
 public class ReportController {
-	
+
 	@Autowired
 	private ReportService reportService;
-	
+
 	@GetMapping("/user/{format}")
 	public String getReport(@PathVariable String format) throws FileNotFoundException, JRException {
-			return reportService.exportReport(format);
+		return reportService.exportReport(format);
 
 	}
 

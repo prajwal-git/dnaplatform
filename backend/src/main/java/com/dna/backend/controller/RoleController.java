@@ -10,7 +10,6 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,10 +50,10 @@ public class RoleController {
 	 */
 	@Autowired
 	RoleService roleService;
-	
+
 // Static default roles list
 	@SuppressWarnings("serial")
-	private final static List<Role> DEFAULT_ROLES = new ArrayList<Role>() {
+	private final static List<Role> DEFAULT_ROLES = new ArrayList<>() {
 		{
 			add(new Role("Admin"));
 			add(new Role("SuperAdmin"));
@@ -85,17 +84,17 @@ public class RoleController {
 //seting default role in userDto
 
 		userService.save(new UserDto("InstanceAdmin", "InstanceAdmin", "InstanceAdmin", "InstanceAdmin",
-				"zorbasofted@gmail.com", "password", "Test", Integer.parseInt("123"), Integer.parseInt("123"),
-				new Date(), true, '\u0000', DEFAULT_ROLES));
+				"zorbasofted@gmail.com", "password", "Test", "123", "123",
+				new Date(), true, "male", DEFAULT_ROLES));
 	}
-	
+
 	/*
 	 * This is rest call which will upload data to ROLE Model
-	 * 
+	 *
 	 * @param MultipartFile
-	 * 
+	 *
 	 * @return List<Role>
-	 * 
+	 *
 	 */
 
 	@PostMapping("/uploaddata")
@@ -105,11 +104,11 @@ public class RoleController {
 
 	/*
 	 * This is rest call which will send CSV formatted data of ROLE
-	 * 
+	 *
 	 * @param none
-	 * 
+	 *
 	 * @return ResponseEntity<Resource> , media type application/csv
-	 * 
+	 *
 	 */
 
 	@GetMapping("/exportrole")

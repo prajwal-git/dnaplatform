@@ -21,8 +21,7 @@ public class KafkaProducerConfig {
 	/**
 	 * Kafka Producer Configuration class to configure Kafka Producer
 	 * 
-	 * @authors Naina and Dinesh 
-	 * version 1.0
+	 * @authors Naina and Dinesh version 1.0
 	 * @since 2021/02/19
 	 *
 	 */
@@ -73,8 +72,7 @@ public class KafkaProducerConfig {
 	 * 
 	 * 2. Send any object to Kafka - ProducerFactory <String, (Object Name eg. User,
 	 * Role, Message, etc)> *Note: the object should be similar to the object used
-	 * in ConsumerFactory
-	 * creating user producer factory using default configs
+	 * in ConsumerFactory creating user producer factory using default configs
 	 * 
 	 */
 

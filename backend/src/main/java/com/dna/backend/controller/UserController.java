@@ -90,7 +90,10 @@ public class UserController {
 
 		}
 	}
-
+	@GetMapping("/login")
+	public String userLogin() {
+		return "login";
+	}
 	@GetMapping("/userCreation")
 	public String getUserCreationForm() {
 		return "userCreation";
@@ -101,8 +104,6 @@ public class UserController {
 		userService.save(userDto);
 		return "redirect:/user/userCreation?success";
 	}
-
-
 
 	@GetMapping("/")
 	public List<User> getAllUsers() {

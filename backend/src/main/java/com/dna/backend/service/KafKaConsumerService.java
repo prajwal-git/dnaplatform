@@ -13,8 +13,7 @@ public class KafKaConsumerService {
 	/**
 	 * Kafka Consumer Service class to complete the message consuming process
 	 * 
-	 * @authors Naina and Dinesh 
-	 * version 1.0
+	 * @authors Naina and Dinesh version 1.0
 	 * @since 2021/02/19
 	 *
 	 */

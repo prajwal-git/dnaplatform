@@ -11,13 +11,11 @@ public class UsersCache {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@org.springframework.cache.annotation.Cacheable(value = "usersCache", key = "#firstName")
 	public User getUser(String firstName) {
 		System.out.println("Retriving from " + firstName);
 		return userRepository.findByFirstName(firstName);
 	}
-	
-	
 
 }

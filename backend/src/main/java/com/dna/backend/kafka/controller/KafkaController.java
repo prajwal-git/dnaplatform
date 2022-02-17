@@ -12,15 +12,15 @@ import com.dna.backend.kafka.producer.Producer;
 @RequestMapping(value = "/kafka")
 public class KafkaController {
 
-    private final Producer producer;
+	private final Producer producer;
 
-    @Autowired
-    KafkaController(Producer producer) {
-        this.producer = producer;
-    }
+	@Autowired
+	KafkaController(Producer producer) {
+		this.producer = producer;
+	}
 
-    @PostMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
-        this.producer.sendMessage(message);
-    }
+	@PostMapping(value = "/publish")
+	public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
+		this.producer.sendMessage(message);
+	}
 }

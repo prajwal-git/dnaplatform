@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name= "Role_Config")
+@Table(name = "Role_Config")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,18 +24,18 @@ public class RoleConfig {
 	@Id
 	@GeneratedValue
 	private int roleConfigId;
-	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name = "roleId", nullable=false)
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "roleId", nullable = false)
 	private Role roleId;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String roleName;
-	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name = "actionId", nullable=false)
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "actionId", nullable = false)
 	private UserActions actionId;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String actionName;
 }
