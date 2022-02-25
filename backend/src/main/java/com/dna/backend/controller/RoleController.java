@@ -85,7 +85,7 @@ public class RoleController {
 //seting default role in userDto
 
 		userService.save(new UserDto("InstanceAdmin", "InstanceAdmin", "InstanceAdmin", "InstanceAdmin",
-				"zorbasofted@gmail.com", "password", "Test", Integer.parseInt("123"), Integer.parseInt("123"),
+				"zorbasofted@gmail.com", "password", "Test", "123","123",
 				new Date(), true, '\u0000', DEFAULT_ROLES));
 	}
 	
