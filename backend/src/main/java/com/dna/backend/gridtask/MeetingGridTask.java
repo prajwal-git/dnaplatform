@@ -77,13 +77,13 @@ public class MeetingGridTask {
 	String nameMeeting;
 	Date timeMeeting;
 
-	@Scheduled(cron = "${grid.meetingcron}")
+	@Scheduled(cron = "${grid.meetingcron}") // runs every 1 hour,settings in application.properties
 	public void run() {
 		meetings = (List<Meeting>) meetingRepo.findAll(); // return all the meeting details from meeting scheduler
 
 	}
 
-	@Scheduled(cron = "${grid.taskmanagercron}")
+	@Scheduled(cron = "${grid.taskmanagercron}") // runs every 15 minutes, settings in application.properties
 	public void taskManager() {
 		try {
 
@@ -105,11 +105,15 @@ public class MeetingGridTask {
 				diff = currentTime - currentMeetingStartTime;// difference between current time and meeting time in
 																// milliseconds
 
-				if ((diff >= 15 * 1000) && (diff < 16 * 1000)) { // 15 minutes after the meeting has been started
-																	// limit is 1 minute to call zoom so that this
-																	// meeting will not call zoom again
-																	// in next iteration. Zoom gets called based on the
-																	// difference in current time and meeting time.
+				if ((diff >= 15 * 60 * 1000) && (diff < 16 * 60 * 1000)) { // 15 minutes after the meeting has been
+																			// started
+																			// limit is 1 minute to call zoom so that
+																			// this
+																			// meeting will not call zoom again
+																			// in next iteration. Zoom gets called based
+																			// on the
+																			// difference in current time and meeting
+																			// time.
 					nameMeeting = m.getMeetingName();
 					timeMeeting = m.getTime();
 
@@ -180,4 +184,3 @@ public class MeetingGridTask {
 
 	}
 }
-
