@@ -1,5 +1,6 @@
 package com.dna.backend.gridtask;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,6 +54,7 @@ import com.dna.backend.repository.UserRepository;
  * Once all the participants are verified, the details of the participants are
  * then inserted into the Attendance module.
  * 
+ * 
  * @author Nischal Dahal
  * @since 2022/02/18
  * 
@@ -105,7 +107,7 @@ public class MeetingGridTask {
 				diff = currentTime - currentMeetingStartTime;// difference between current time and meeting time in
 																// milliseconds
 
-				if ((diff >= 15 * 1000) && (diff < 16 * 1000)) { // 15 minutes after the meeting has been started
+				if ((diff >= 15 *60* 1000) && (diff <= 29 *60* 1000)) { // 15 minutes after the meeting has been started
 																	// limit is 1 minute to call zoom so that this
 																	// meeting will not call zoom again
 																	// in next iteration. Zoom gets called based on the
@@ -125,6 +127,8 @@ public class MeetingGridTask {
 					JSONObject obj = new JSONObject(jsonString);// converting JSON String into JSON object
 					JSONArray meetingParticipants = obj.getJSONArray("participants");// getting all elements of array
 																						// participants using JSONArray
+					DateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy, hh:mm a '-' zzzz");
+					String getMeetingTime = formatter.format(timeMeeting);
 
 					for (int i = 0; i < meetingParticipants.length(); i++) {
 						JSONObject participantsDetail = meetingParticipants.getJSONObject(i);
@@ -134,6 +138,7 @@ public class MeetingGridTask {
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						String userName = (String) participantsDetail.get("userName");// fetch respective participant's
 																						// user name
+						String meetingName = (String) participantsDetail.get("meetingName");
 
 						String getMeetingDate = (String) participantsDetail.get("meetingDate");// result meeting date is
 																								// in
@@ -150,9 +155,9 @@ public class MeetingGridTask {
 						if (userRepo.getEmail(participantsEmail) == null) { // if participant email is not verified,
 																			// email will be sent to ADMIN
 
-							String messageBody = "Unregistered user name " + userName + " with email address "
-									+ participantsEmail + " detected in meeting " + nameMeeting + " held on "
-									+ timeMeeting;
+							String messageBody = "Admin," + "\nThis is to notify you that unregistered user name "
+									+ userName + " with email address " + participantsEmail + " was detected in class "
+									+ nameMeeting + " held on " + getMeetingTime;
 
 							emailService.sendMessage("mailreceivertospringboot@gmail.com", "Alert", messageBody);// EmailSenderService
 																													// class
@@ -162,22 +167,54 @@ public class MeetingGridTask {
 
 						} else { // if statement is false
 
-							Attendance attendance = new Attendance(userName, meetingDate, loginTime, logoutTime);// setting
-																													// the
-																													// details
-																													// in
-																													// Attendance
-																													// module
+							Attendance attendance = new Attendance(userName, participantsEmail, meetingName,
+									meetingDate, loginTime, logoutTime);// setting
+							// the
+							// details
+							// in
+							// Attendance
+							// module
 							attendanceRepo.save(attendance);// Adding the details in the Attendance table
 						}
 					}
+
+					ResponseEntity<String> meetingRef = rt.exchange("http://localhost:8081/meeting_ref/" + nameMeeting,
+							HttpMethod.GET, entity, String.class);
+					System.out.println(meetingRef.toString());
+					String jsonObject = meetingRef.toString();
+
+					int index = jsonObject.indexOf("{");
+					jsonObject = jsonObject.substring(index);
+
+					JSONObject meetingRefObj = new JSONObject(jsonObject);// converting JSON String into JSON
+																			// object
+					JSONArray meetingRefDetails = meetingRefObj.getJSONArray("details");// getting all elements of array
+					// details using JSONArray
+					for (int i = 0; i < meetingRefDetails.length(); i++) {
+						JSONObject studentDetails = meetingRefDetails.getJSONObject(i);
+						String getUserName = (String) studentDetails.get("userName");
+						String getEmailAddress = (String) studentDetails.get("emailAddress");
+
+						if (attendanceRepo.getEmail(getEmailAddress, m.getTime(), m.getMeetingName()) == null) {
+							String messageBody2 = "Dear " + getUserName + " \nWe are so sorry that you missed "
+									+ nameMeeting + " class held on " + getMeetingTime
+									+ ". If possible, please provide us the specific"
+									+ " reason behind not attending the class for our record. Hope to see you in next class. "
+									+ "\n\nKind Regards" + "\nAdmin";
+
+							emailService.sendMessage(getEmailAddress, "Alert", messageBody2);
+						} else {
+							System.out.println("Attended class");
+						}
+
+					}
 				}
+
 			}
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
-
 	}
-}
 
+}
