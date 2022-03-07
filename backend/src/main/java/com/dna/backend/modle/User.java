@@ -37,13 +37,13 @@ public class User {
 	private String cellPhone;
 	private Date dob;
 	private boolean isActive;
-	private String gender;
+	private Character gender;
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
 	private Collection<Role> roles;
 
 	public User(String userName, String firstName, String lastName, String middleName, String email, String password,
-			String address, String officePhone, String cellPhone, Date dob, boolean isActive, String gender,
+			String address, String officePhone, String cellPhone, Date dob, boolean isActive, Character gender,
 			Collection<Role> roles) {
 		super();
 		this.userName = userName;
