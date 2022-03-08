@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.dna.backend.modle.Role;
-
+//update
 /* used some annotation for the purpose of server side validation. In registration , 
  * some field required fill with size of character and message will display if not fill properly*/
 public class UserDto {
